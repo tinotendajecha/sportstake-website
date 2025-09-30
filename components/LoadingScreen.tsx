@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Trophy, Target, TrendingUp, Users } from 'lucide-react';
+import Image from 'next/image'
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,9 +42,18 @@ export default function LoadingScreen() {
       <div className="relative z-10 flex flex-col items-center space-y-8 px-4">
         {/* Logo */}
         <div className="relative group">
-          <div className="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 transition-all duration-500 hover:bg-white/15 hover:scale-105">
-            <Trophy className="w-16 h-16 text-white" />
-          </div>
+          <div className="p-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                          <div className="relative w-16 h-16 lg:w-22 lg:h-22">
+                            <Image
+                              src="/images/sportstake22.png"
+                              alt="SportsTake"
+                              fill
+                              className="object-contain"
+                              sizes="(min-width:1024px) 2.5rem, 2rem"
+                              priority
+                            />
+                          </div>
+                        </div>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl transform -skew-x-12"></div>
         </div>
 
