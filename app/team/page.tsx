@@ -24,19 +24,19 @@ const teamMembers = [
       twitter: '#',
       linkedin: '#',
       facebook: '#'
-    }
+    },
   },
-  // {
-  //   name: 'Kudzai Chitima',
-  //   role: 'Strategic Advisor',
-  //   image: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  //   description: 'Strategic advisor with extensive experience in sports business development and market analysis. Focused on driving innovation and growth across African sports markets.',
-  //   social: {
-  //     twitter: '#',
-  //     linkedin: '#',
-  //     facebook: '#'
-  //   }
-  // }
+  {
+    name: 'Kudzai Chitima',
+    role: 'Strategic Advisor',
+    image: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+    description: 'Strategic advisor with extensive experience in sports business development and market analysis. Focused on driving innovation and growth across African sports markets.',
+    social: {
+      twitter: '#',
+      linkedin: '#',
+      facebook: '#'
+    }
+  }
 ];
 
 export default function Team() {
@@ -122,7 +122,7 @@ export default function Team() {
               Join Our Team
             </h2>
             <p className="text-base lg:text-xl text-white/90 mb-6 lg:mb-8 max-w-2xl mx-auto">
-              We're always looking for talented individuals who share our passion for sports business development and innovation.
+              We are always looking for talented individuals who share our passion for sports business development and innovation.
             </p>
             <div className="flex justify-center space-x-4 lg:space-x-6">
               <a
