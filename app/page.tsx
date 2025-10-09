@@ -20,7 +20,7 @@ export default function Home() {
               <p className="text-base lg:text-xl xl:text-2xl text-white/95 leading-relaxed">
                 We are a <span className="font-semibold text-green-200">sports business development</span>, 
                 brand strategy, athlete management, and data analytics consulting firm built to help 
-                contribute to the sports sector's development.
+                contribute to the sports sectors development.
               </p>
               <p className="text-base lg:text-xl xl:text-2xl text-white/95 leading-relaxed">
                 We bring talent, expertise, and skills that can contribute towards the development of 

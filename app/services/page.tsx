@@ -3,15 +3,19 @@
 import Layout from '@/components/Layout';
 import { ChartBar as BarChart3, Building2, Users, Target, ArrowRight } from 'lucide-react';
 
+import Image from 'next/image';
+
 const services = [
   {
     icon: BarChart3,
+    imgSrc: '/images/sportstake32.png',
     title: 'Data-Oriented Industry Mapping',
     description:
       'Market intelligence surveys for data rich outputs, research and development on policies, growth frameworks',
     color: 'from-green-500 to-emerald-500',
   },
   {
+    imgSrc: '/images/sportstake34.png',
     icon: Building2,
     title: 'Business Model Development',
     description:
@@ -19,6 +23,7 @@ const services = [
     color: 'from-yellow-500 to-orange-500',
   },
   {
+    imgSrc: '/images/sportstake33.png',
     icon: Users,
     title: 'Networking & Events',
     description:
@@ -26,6 +31,7 @@ const services = [
     color: 'from-teal-500 to-cyan-500',
   },
   {
+    imgSrc: '/images/sportstake35.png',
     icon: Target,
     title: 'Talent Development',
     description:
@@ -113,11 +119,12 @@ export default function Services() {
                 className="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-4 lg:p-8 transition-all duration-500 hover:bg-white/15 hover:scale-105 hover:shadow-2xl"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div
+                {/* <div
                   className={`inline-flex p-3 lg:p-4 rounded-xl bg-gradient-to-br ${service.color} bg-opacity-20 mb-4 lg:mb-6`}
                 >
                   <IconComponent className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
-                </div>
+                </div> */}
+                <Image src={service.imgSrc} alt="alt" width={50} height={50} />
                 <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4 group-hover:text-green-200 transition-colors duration-300">
                   {service.title}
                 </h3>
