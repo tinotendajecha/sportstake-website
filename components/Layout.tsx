@@ -58,7 +58,7 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
 
       {/* Main Content */}
       <div className="relative z-10 pt-6 sm:pt-8">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-24 py-8 lg:py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-22 py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
             {/* Left sidebar: logo + vertical capsules */}
             <aside className="mb-8 lg:mb-0 lg:w-80 shrink-0">
