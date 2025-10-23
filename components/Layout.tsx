@@ -44,14 +44,14 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
             backgroundImage: backgroundImage || `url('https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')`
           }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-800/90 via-green-700/85 to-teal-800/90"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,hsl(var(--background))_0%,hsl(var(--card))_60%)]/90"></div>
       </div>
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-1/3 -left-1/4 w-80 h-80 bg-gradient-to-tr from-yellow-400/20 to-transparent rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-gradient-to-bl from-green-400/15 to-transparent rounded-full blur-xl animate-bounce delay-2000"></div>
+        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-1/3 -left-1/4 w-80 h-80 bg-gradient-to-tr from-accent/20 to-transparent rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-gradient-to-bl from-secondary/15 to-transparent rounded-full blur-xl animate-bounce delay-2000"></div>
       </div>
 
       {/* Sidebar + Content layout on desktop; stacked on mobile */}
@@ -90,9 +90,9 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
                         <Link
                           href={item.path}
                           aria-current={isActive ? 'page' : undefined}
-                          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-base font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-white/40 ${isActive
-                              ? 'border-white text-white bg-white/10'
-                              : 'border-white/60 text-white/90 hover:bg-white/10 hover:border-white'
+                          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-base font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-ring ${isActive
+                              ? 'border-primary text-primary-foreground bg-primary/10'
+                              : 'border-border text-primary-foreground/90 hover:bg-accent/10 hover:border-foreground/60'
                             }`}
                         >
                           <IconComponent className="w-4 h-4" />
@@ -109,10 +109,10 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
             <section className="flex-1">
               {/* Page Header */}
               <div className="mb-8 lg:mb-12 space-y-4 lg:space-y-6 text-center lg:text-left">
-                <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground leading-tight">
                   {title}
                   {subtitle && (
-                    <span className="block bg-gradient-to-r from-yellow-200 via-green-200 to-emerald-200 bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-5xl xl:text-6xl mt-2">
+                    <span className="block bg-gradient-to-r from-accent/80 via-primary/70 to-secondary/70 bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-5xl xl:text-6xl mt-2">
                       {subtitle}
                     </span>
                   )}
