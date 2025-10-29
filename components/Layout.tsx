@@ -2,15 +2,21 @@
 
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Trophy,
   Target,
   Briefcase,
   Users,
   Eye,
-  Sparkles
+  Sparkles,
+  LogIn,
+  User,
+  LogOut
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import Image from 'next/image';
+import { useState } from 'react';
 
 const navigationItems = [
   { path: '/', label: 'Home', icon: Trophy },
@@ -20,7 +26,6 @@ const navigationItems = [
   { path: '/vision-mission', label: 'Vision & Mission', icon: Eye },
   { path: '/partnerships', label: 'Partnerships', icon: Users },
 ];
-import Image from 'next/image';
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,10 +36,78 @@ interface LayoutProps {
 
 export default function Layout({ children, title, subtitle, backgroundImage }: LayoutProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout, isAuthenticated } = useAuth();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    router.push('/');
+  };
 
   // Capsule nav sits below the logo; no mobile overlay menu needed
   return (
     <div className="relative min-h-screen overflow-hidden">
+      {/* Top Navigation Bar - Auth Status */}
+      <nav className="relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-22 pt-4 sm:pt-6">
+          <div className="flex justify-end">
+            <div className="flex items-center gap-3">
+              {isAuthenticated && user ? (
+                // User is logged in - show email with dropdown menu
+                <div className="relative">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm text-cyan-200 border border-cyan-400/40 rounded-full font-medium hover:bg-cyan-500/30 hover:text-yellow-300 hover:border-yellow-400/60 transition-all duration-200"
+                  >
+                    <User className="w-4 h-4" />
+                    <span className="text-sm sm:text-base">{user.email}</span>
+                  </button>
+                  
+                  {/* Dropdown menu */}
+                  {showUserMenu && (
+                    <>
+                      <div 
+                        className="fixed inset-0 z-10" 
+                        onClick={() => setShowUserMenu(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-md border border-cyan-400/40 rounded-xl shadow-xl z-20 overflow-hidden">
+                        <button
+                          onClick={handleLogout}
+                          className="w-full px-4 py-3 text-left text-sm text-cyan-200 hover:bg-red-500/20 hover:text-red-300 transition-colors flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>Logout</span>
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                // User is not logged in - show Login and Sign Up links
+                <div className="flex items-center gap-3">
+                  <Link
+                    href="/login"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm text-cyan-200 border border-cyan-400/40 rounded-full font-medium hover:bg-cyan-500/30 hover:text-yellow-300 hover:border-yellow-400/60 transition-all duration-200 text-sm sm:text-base"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    <span>Login</span>
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF5E00] to-[#FF5E00]/80 text-white border border-yellow-400/40 rounded-full font-medium hover:from-[#FF5E00]/90 hover:to-[#FF5E00]/70 hover:shadow-lg hover:shadow-orange-400/30 transition-all duration-200 text-sm sm:text-base"
+                  >
+                    <span>Sign Up</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Background Image */}
       <div className="absolute inset-0">
         <div

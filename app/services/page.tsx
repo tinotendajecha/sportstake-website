@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Layout from '@/components/Layout';
 import {
   ChartBar as BarChart3,
@@ -10,8 +11,10 @@ import {
   BriefcaseBusiness,
   Megaphone,
   Trophy,
+  LogIn,
 } from 'lucide-react';
-
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 const services = [
@@ -72,6 +75,16 @@ const serviceButtons = [
 ];
 
 export default function Services() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  // Handle login redirect for protected buttons
+  const handleProtectedClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const currentPath = '/services';
+    router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+  };
+
   return (
     <Layout
       title="Our"
@@ -87,35 +100,65 @@ export default function Services() {
               <div>
                 <h2 className="text-2xl lg:text-4xl font-bold text-white mb-4">Start Here</h2>
                 <p className="text-lg lg:text-xl text-white/90 mb-6 lg:mb-8">
-                  Pick a track and fill in a quick form — we’ll follow up.
+                  Pick a track and fill in a quick form — we'll follow up.
                 </p>
               </div>
 
               <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
                 {serviceButtons.map((button) => {
                   const Icon = button.icon;
+                  // Check if user is authenticated to determine button behavior
+                  const isProtected = !isAuthenticated;
+                  
                   return (
-                    <a
+                    <div
                       key={button.title}
-                      href={button.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6 lg:p-8 transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:shadow-xl text-center block"
+                      onClick={isProtected ? handleProtectedClick : undefined}
+                      className={`group bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6 lg:p-8 transition-all duration-300 hover:bg-white/20 hover:scale-105 hover:shadow-xl text-center ${
+                        isProtected ? 'cursor-pointer' : ''
+                      }`}
                     >
-                      <div className="flex justify-center mb-3">
-                        <div className="p-3 rounded-full bg-yellow-400/20">
-                          <Icon className="w-6 h-6 text-yellow-400" />
-                        </div>
-                      </div>
-                      <h3 className="text-base lg:text-lg font-semibold text-white mb-2 group-hover:text-green-200 transition-colors duration-300">
-                        {button.title}
-                      </h3>
-                      <p className="text-xs lg:text-sm text-white/70 mb-4">{button.description}</p>
-                      <span className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-yellow-400/90 text-black group-hover:bg-yellow-300 transition-colors">
-                        Click to Start
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </span>
-                    </a>
+                      {isAuthenticated ? (
+                        // Authenticated: show link to Google Form
+                        <a
+                          href={button.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <div className="flex justify-center mb-3">
+                            <div className="p-3 rounded-full bg-yellow-400/20">
+                              <Icon className="w-6 h-6 text-yellow-400" />
+                            </div>
+                          </div>
+                          <h3 className="text-base lg:text-lg font-semibold text-white mb-2 group-hover:text-green-200 transition-colors duration-300">
+                            {button.title}
+                          </h3>
+                          <p className="text-xs lg:text-sm text-white/70 mb-4">{button.description}</p>
+                          <span className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-yellow-400/90 text-black group-hover:bg-yellow-300 transition-colors">
+                            Click to Start
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </span>
+                        </a>
+                      ) : (
+                        // Not authenticated: show login prompt
+                        <>
+                          <div className="flex justify-center mb-3">
+                            <div className="p-3 rounded-full bg-yellow-400/20">
+                              <Icon className="w-6 h-6 text-yellow-400" />
+                            </div>
+                          </div>
+                          <h3 className="text-base lg:text-lg font-semibold text-white mb-2 group-hover:text-green-200 transition-colors duration-300">
+                            {button.title}
+                          </h3>
+                          <p className="text-xs lg:text-sm text-white/70 mb-4">{button.description}</p>
+                          <span className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-cyan-400/90 text-black group-hover:bg-cyan-300 transition-colors">
+                            Login to start assessment
+                            <LogIn className="w-4 h-4 ml-2" />
+                          </span>
+                        </>
+                      )}
+                    </div>
                   );
                 })}
               </div>
