@@ -6,8 +6,8 @@ import { ArrowRight, Users, Trophy, ChartBar as BarChart3, Zap } from 'lucide-re
 
 export default function Home() {
   return (
-    <Layout 
-      title="Welcome to" 
+    <Layout
+      title="Welcome to"
       subtitle="SportsTake"
       backgroundImage="url('/images/sportstake5.jpg')"
     >
@@ -18,17 +18,11 @@ export default function Home() {
           <div className="relative bg-card/10 backdrop-blur-sm rounded-2xl border border-border/40 p-8 lg:p-12">
             <div className="space-y-6 lg:space-y-8">
               <p className="text-base lg:text-xl xl:text-2xl text-foreground/95 leading-relaxed">
-                We are a <span className="font-semibold text-primary/70">sports business development</span>, 
-                brand strategy, athlete management, and data analytics consulting firm built to help 
-                contribute to the sports sectors development.
+                SportsTake Labs is an AI-driven Sports Innovation & Technology company specializing in strategic consulting across business development, brand strategy, sports consumer goods, athlete development\management, and data analytics.
+                We leverage artificial intelligence, virtual + mixed reality, and data-driven insights to contribute to the transformation of the African sports sector. Our technology stack, which includes <span className="font-semibold text-primary/70">VR athlete development platforms, Gamified Fan engagement & 'Train Like a Pro' apps</span> among others, is designed to enhance performance, revolutionize fan engagement, and optimize efficiency.
               </p>
-              <p className="text-base lg:text-xl xl:text-2xl text-foreground/95 leading-relaxed">
-                We bring talent, expertise, and skills that can contribute towards the development of 
-                the sports economy and market by unlocking value for stakeholders through 
-                <span className="font-semibold text-accent/80"> data-oriented business</span> and 
-                industry development processes that will deliver robust value for athletes, teams/clubs, 
-                and governing organizations.
-              </p>
+
+              <p className="text-base lg:text-xl xl:text-2xl text-foreground/95 leading-relaxed">We unlock value for all stakeholders—athletes, teams, clubs, and governing bodies—by driving the evolution of the sports economy through cutting-edge, data-oriented  solutions.</p>
             </div>
           </div>
         </div>

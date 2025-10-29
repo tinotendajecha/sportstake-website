@@ -44,7 +44,7 @@ export default function Team() {
     <Layout 
       title="Our" 
       subtitle="Team"
-      backgroundImage="url('https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"
+     backgroundImage="url('/images/sportstake7.jpg')"
     >
       <div className="space-y-12 lg:space-y-16">
         {/* Team Grid */}

@@ -33,7 +33,6 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
   const pathname = usePathname();
 
   // Capsule nav sits below the logo; no mobile overlay menu needed
-
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Image */}
@@ -61,58 +60,82 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-22 py-8 lg:py-12">
           <div className="flex flex-col lg:flex-row lg:items-start lg:gap-12">
             {/* Left sidebar: logo + vertical capsules */}
-            <aside className="mb-8 lg:mb-0 lg:w-80 shrink-0">
-              <div className="flex flex-col space-x-3">
-                <div className="p-1 rounded-2xl ">
-                  <div className="relative w-40 h-40 lg:w-48 lg:h-48 rounded-2xl overflow-hidden bg-transparent">
-                    <Image
-                      src="/images/sportstake30.png"
-                      alt="SportsTake"
-                      fill
-                      className="object-contain"
-                      sizes="(min-width:1024px) 6rem, 4rem"
-                      priority
-                    />
-                  </div>
+            <aside className="mb-6 lg:mb-0 w-full max-w-xs lg:max-w-none lg:w-80 shrink-0">
+              <div className="rounded-2xl bg-black/40 backdrop-blur-md shadow-xl pb-4 pt-4 px-2 sm:px-4 flex flex-col items-center space-y-3 sm:space-y-4">
+                {/* Logo & Name */}
+                <div className="relative w-24 h-24 sm:w-36 sm:h-36 lg:w-36 lg:h-36 rounded-2xl overflow-hidden 
+      bg-gradient-to-br from-cyan-500/50 via-black/60 to-orange-400/30 
+      shadow-md flex items-center justify-center">
+                  <Image
+                    src="/images/sportstake30.png"
+                    alt="SportsTake"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width:640px) 6rem, (min-width:1024px) 6rem, 4rem"
+                    priority
+                  />
                 </div>
-                {/* <div>
-                  <span className="text-white font-bold text-2xl lg:text-3xl leading-tight">Sportstake Labs</span>
-                </div> */}
-              </div>
+                <span className="mt-1 sm:mt-2 font-extrabold text-xl sm:text-2xl lg:text-3xl 
+      bg-clip-text text-transparent 
+      bg-gradient-to-r from-cyan-300 via-yellow-400 to-orange-400 
+      drop-shadow text-center tracking-tight">
+                  Sportstake Labs
+                </span>
 
-              <nav className="mt-4 lg:mt-6">
-                <ul className="flex flex-col gap-3 items-start">
-                  {navigationItems.map((item) => {
-                    const IconComponent = item.icon;
-                    const isActive = pathname === item.path;
-                    return (
-                      <li key={item.path}>
-                        <Link
-                          href={item.path}
-                          aria-current={isActive ? 'page' : undefined}
-                          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-base font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-ring ${isActive
-                              ? 'border-primary text-primary-foreground bg-primary/10'
-                              : 'border-border text-primary-foreground/90 hover:bg-accent/10 hover:border-foreground/60'
-                            }`}
-                        >
-                          <IconComponent className="w-4 h-4" />
-                          <span>{item.label}</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </nav>
+                {/* Navigation - Capsule Buttons */}
+                <nav className="mt-3 sm:mt-5 w-full">
+                  <ul className="flex flex-col gap-2 sm:gap-4 items-center w-full">
+                    {navigationItems.map((item) => {
+                      const IconComponent = item.icon;
+                      const isActive = pathname === item.path;
+                      return (
+                        <li key={item.path} className="w-full">
+                          <Link
+                            href={item.path}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`
+                  inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 w-full
+                  rounded-full font-semibold text-base sm:text-lg border shadow
+                  transition-all duration-200
+                  ${isActive
+                                ? 'bg-gradient-to-r from-cyan-200/40 via-cyan-100/30 to-orange-100/20 text-black border border-yellow-200 shadow'
+                                : 'bg-black/70 text-cyan-200 border border-cyan-400/40 hover:bg-cyan-500/30 hover:text-yellow-300 hover:shadow-md'
+                              }`
+                            }
+                          >
+                            <IconComponent className={`w-5 h-5 sm:w-6 sm:h-6 ${isActive ? 'text-yellow-400/90' : 'text-cyan-300'}`} />
+                            <span>{item.label}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+              </div>
             </aside>
 
             {/* Right content area */}
             <section className="flex-1">
               {/* Page Header */}
               <div className="mb-8 lg:mb-12 space-y-4 lg:space-y-6 text-center lg:text-left">
-                <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground leading-tight">
+                <h1
+                  className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+                  style={{
+                    color: '#00d7ef', // vivid cyan
+                    textShadow: '0 2px 12px rgba(0,0,0,0.7), 0 1px 0 rgba(0,0,0,0.9)',
+                    transition: 'color 0.2s'
+                  }}
+                >
                   {title}
                   {subtitle && (
-                    <span className="block bg-gradient-to-r from-accent/80 via-primary/70 to-secondary/70 bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-5xl xl:text-6xl mt-2">
+                    <span
+                      className="block mt-2"
+                      style={{
+                        color: '#ffd500', // bright yellow for contrast
+                        textShadow: '0 2px 8px rgba(0,0,0,0.6)',
+                        fontWeight: 600
+                      }}
+                    >
                       {subtitle}
                     </span>
                   )}

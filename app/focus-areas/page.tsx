@@ -125,7 +125,6 @@ export default function FocusAreas() {
               className="group relative rounded-full w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 overflow-hidden ring-4 ring-black/50 hover:ring-yellow-300 focus:ring-yellow-300 transition-all duration-300 shadow-xl focus:outline-none"
               style={{ animationDelay: `${idx * 80}ms` }}
             >
-              {/* placeholder or per-item image */}
               <Image
                 src={area.image || '/images/sportstake11.png'}
                 alt=""
@@ -142,7 +141,14 @@ export default function FocusAreas() {
               <div className="pointer-events-none absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
             </button>
 
-            <h3 className="mt-4 text-center text-white font-bold text-base md:text-lg leading-tight">
+            {/* Highly readable heading below each button */}
+            <h3 className="mt-4 text-center font-bold text-base md:text-lg leading-tight"
+              style={{
+                color: "#00eaff",
+                textShadow: "0 2px 16px #000, 0 1px 0 #222",
+                fontWeight: 900
+              }}
+            >
               {area.title}
             </h3>
           </div>

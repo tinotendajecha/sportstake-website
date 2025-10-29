@@ -24,10 +24,10 @@ export default function VisionMission() {
             
             <div className="space-y-4 lg:space-y-6 text-sm lg:text-xl text-white/95 leading-relaxed">
               <p>
-                Our objective is to deliver/establish Africa's 1st bona-fide <span className="font-semibold text-green-200">sports business development Accelerator</span> with a Pan-African footprint, churning out top notch sports industry innovation to get us up to speed with Global standards. Kickstarting a sports business development revolution in Zimbabwe then onto Africa, developing & accelerating a myriad of high growth value streams for different stakeholders that include artists, athletes, teams, institutions among others by creating synergies within connected industries that offer value to sports development, the creative economy and administrative bodies among others by leveraging <span className="font-semibold text-yellow-200">analytics, open data development</span> to guide business/organizational processes to drive innovation and uptake of cutting edge solutions that enrich the sports development ecosystem in Zim and beyond.
+               To develop and accelerate high-growth value streams across the African sports industry by leveraging AI, open data, and strategic collaboration, ensuring stakeholders (athletes, teams, governing organisations, corporations, etc.) achieve their full economic potential as we build Africa's biggest new-age Sports Accelerator & Innovation Hub unlocking capital, and aligning the continent's sports industry with global excellence.
               </p>
               <p>
-                Enabling interface between Private and public players through collaboration aimed at Unlocking capital and growth finance backed by extensive data oriented design thinking processes across branding, marketing, fan engagement, etc with growth paths like robust content development, financial management, sponsorship dealflow etc.
+               To be the recognized leader in African sports development, decisively helping to transform the industry by deploying co-created cutting-edge, AI-driven business frameworks across media, marketing, apparel, business and finance development. We will work to establish expansive, collaborative processes that create a cohesive, high-growth ecosystem, unlocking significant and sustainable economic value for all stakeholders and elevating the continent's sports output to global standards.
               </p>
             </div>
           </div>
