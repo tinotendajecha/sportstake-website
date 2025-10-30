@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 // import { mdiFootball, mdiWhistle } from '@mdi/js';
 import { FaFootballBall } from 'react-icons/fa';
-import { GiWhistle } from 'react-icons/gi';
+import { GiWhistle, GiSoccerBall } from 'react-icons/gi';
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -67,15 +67,21 @@ export default function LoadingScreen() {
 
         {/* Animated Loading Icons */}
         <div className="flex space-x-6 text-neon-orange">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className={`transform transition-transform duration-700 ease-in-out animate-loadingBounce delay-${i * 300}`}
-              style={{ color: i % 2 === 0 ? '#FF5E00' : '#FFD500' }}
-            >
-              {i % 2 === 0 ? <FaFootballBall size={24} color="#FF5E00" />: <GiWhistle size={24} color="#FFD500" />}
-            </div>
-          ))}
+          <div
+            className="transform transition-transform duration-700 ease-in-out animate-loadingBounce delay-0"
+          >
+            <FaFootballBall size={24} color="#FF5E00" />
+          </div>
+          <div
+            className="transform transition-transform duration-700 ease-in-out animate-loadingBounce delay-300"
+          >
+            <GiSoccerBall size={24} color="#FFD500" />
+          </div>
+          <div
+            className="transform transition-transform duration-700 ease-in-out animate-loadingBounce delay-600"
+          >
+            <GiWhistle size={24} color="#FF5E00" />
+          </div>
         </div>
 
         {/* Progress Bar */}

@@ -168,11 +168,11 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
                             aria-current={isActive ? 'page' : undefined}
                             className={`
                   inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 w-full
-                  rounded-full font-semibold text-base sm:text-lg border shadow
+                  font-semibold text-base sm:text-lg
                   transition-all duration-200
                   ${isActive
-                                ? 'bg-gradient-to-r from-cyan-200/40 via-cyan-100/30 to-orange-100/20 text-black border border-yellow-200 shadow'
-                                : 'bg-black/70 text-cyan-200 border border-cyan-400/40 hover:bg-cyan-500/30 hover:text-yellow-300 hover:shadow-md'
+                                ? 'rounded-full bg-gradient-to-r from-cyan-200/40 via-cyan-100/30 to-orange-100/20 text-black border border-yellow-200 shadow'
+                                : 'rounded-lg bg-transparent text-cyan-200 hover:text-yellow-300 hover:bg-cyan-500/10'
                               }`
                             }
                           >
