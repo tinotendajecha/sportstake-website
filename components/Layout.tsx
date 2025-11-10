@@ -157,12 +157,12 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
 
                 {/* Navigation - Capsule Buttons */}
                 <nav className="mt-3 sm:mt-5 w-full">
-                  <ul className="flex flex-col gap-2 sm:gap-4 items-center w-full">
+                  <ul className="flex flex-col gap-2 sm:gap-4 items-start w-full ">
                     {navigationItems.map((item) => {
                       const IconComponent = item.icon;
                       const isActive = pathname === item.path;
                       return (
-                        <li key={item.path} className="w-full">
+                        <li key={item.path} className="">
                           <Link
                             href={item.path}
                             aria-current={isActive ? 'page' : undefined}
