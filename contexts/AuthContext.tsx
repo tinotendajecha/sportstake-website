@@ -9,7 +9,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 // User type definition
 interface User {
   id: string;
-  email: string;
+  email: string | null;
+  phone: string | null;
   createdAt: string;
 }
 
@@ -17,8 +18,8 @@ interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  signup: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  login: (emailOrPhone: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signup: (email: string | null, phone: string | null, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -50,15 +51,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loadUser();
   }, []);
 
-  // Login function
-  const login = async (email: string, password: string) => {
+  // Login function - accepts email or phone
+  const login = async (emailOrPhone: string, password: string) => {
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ emailOrPhone, password }),
       });
 
       const data = await response.json();
@@ -81,15 +82,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Signup function
-  const signup = async (email: string, password: string) => {
+  // Signup function - accepts email or phone (at least one required)
+  const signup = async (email: string | null, phone: string | null, password: string) => {
     try {
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, phone, password }),
       });
 
       const data = await response.json();

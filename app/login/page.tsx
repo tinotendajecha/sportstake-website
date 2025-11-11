@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Mail, Lock, LogIn, Sparkles } from 'lucide-react';
+import { Mail, Phone, Lock, LogIn, Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
 
 export default function LoginPage() {
@@ -16,7 +16,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const { login, isAuthenticated } = useAuth();
   
-  const [email, setEmail] = useState('');
+  const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    const result = await login(email, password);
+    const result = await login(emailOrPhone, password);
 
     if (result.success) {
       // Redirect to the page user tried to access, or home
@@ -71,21 +71,25 @@ export default function LoginPage() {
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Email input */}
+                {/* Email or Phone input */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-semibold text-cyan-200">
-                    Email
+                  <label htmlFor="emailOrPhone" className="block text-sm font-semibold text-cyan-200">
+                    Email or Phone Number
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-400/70" />
+                    {emailOrPhone.includes('@') ? (
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-400/70" />
+                    ) : (
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-400/70" />
+                    )}
                     <input
-                      id="email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="emailOrPhone"
+                      type="text"
+                      value={emailOrPhone}
+                      onChange={(e) => setEmailOrPhone(e.target.value)}
                       required
                       className="w-full pl-10 pr-4 py-3 bg-black/60 border border-cyan-400/40 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-yellow-400/60 focus:ring-2 focus:ring-yellow-400/30 transition-all"
-                      placeholder="you@example.com"
+                      placeholder="you@example.com or +1234567890"
                     />
                   </div>
                 </div>

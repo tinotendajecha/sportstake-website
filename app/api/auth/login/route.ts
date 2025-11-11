@@ -9,33 +9,56 @@ import { verifyPassword } from '@/lib/auth';
 // Force dynamic rendering - this route uses request.json() and makes database calls
 export const dynamic = 'force-dynamic';
 
+// Helper function to check if string is email or phone
+function isEmail(str: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(str);
+}
+
+// Helper function to normalize phone number (remove spaces, dashes, etc.)
+function normalizePhone(phone: string): string {
+  return phone.replace(/\D/g, ''); // Remove all non-digit characters
+}
+
 // POST handler for user login
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const body = await request.json();
-    const { email, password } = body;
+    const { emailOrPhone, password } = body;
 
     // Validate input
-    if (!email || !password) {
+    if (!emailOrPhone || !password) {
       return NextResponse.json(
-        { error: 'Email and password are required' },
+        { error: 'Email/phone and password are required' },
         { status: 400 }
       );
     }
 
-    // Find user by email (case-insensitive)
-    const user = await prisma.user.findUnique({
-      where: { email: email.toLowerCase() },
-    });
+    let user;
 
-    // Generic error message to prevent email enumeration
+    // Check if input is email or phone
+    if (isEmail(emailOrPhone)) {
+      // Find user by email (case-insensitive)
+      user = await prisma.user.findUnique({
+        where: { email: emailOrPhone.toLowerCase() },
+      });
+    } else {
+      // Find user by phone (normalize phone number)
+      // Note: Using findFirst as fallback for phone lookup until Prisma client is regenerated
+      const normalizedPhone = normalizePhone(emailOrPhone);
+      user = await prisma.user.findFirst({
+        where: { phone: normalizedPhone },
+      } as any);
+    }
+
+    // Generic error message to prevent enumeration
     // Always check password even if user doesn't exist (timing attack mitigation)
     if (!user) {
       // Still hash a dummy password to prevent timing attacks
       await verifyPassword(password, '$2a$10$dummyhashforsecurity');
       return NextResponse.json(
-        { error: 'Invalid email or password' },
+        { error: 'Invalid email/phone or password' },
         { status: 401 }
       );
     }
@@ -45,7 +68,7 @@ export async function POST(request: NextRequest) {
 
     if (!isPasswordValid) {
       return NextResponse.json(
-        { error: 'Invalid email or password' },
+        { error: 'Invalid email/phone or password' },
         { status: 401 }
       );
     }
@@ -57,6 +80,7 @@ export async function POST(request: NextRequest) {
         user: {
           id: user.id,
           email: user.email,
+          phone: (user as any).phone || null,
           createdAt: user.createdAt,
         },
       },

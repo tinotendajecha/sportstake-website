@@ -12,7 +12,8 @@ import {
   Sparkles,
   LogIn,
   User,
-  LogOut
+  LogOut,
+  Handshake
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import Image from 'next/image';
@@ -24,7 +25,7 @@ const navigationItems = [
   { path: '/services', label: 'Services', icon: Briefcase },
   { path: '/team', label: 'Team', icon: Users },
   { path: '/vision-mission', label: 'Vision & Mission', icon: Eye },
-  { path: '/partnerships', label: 'Partnerships', icon: Users },
+  { path: '/partnerships', label: 'Partnerships', icon: Handshake },
 ];
 
 interface LayoutProps {
@@ -56,14 +57,14 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
           <div className="flex justify-end">
             <div className="flex items-center gap-3">
               {isAuthenticated && user ? (
-                // User is logged in - show email with dropdown menu
+                // User is logged in - show email/phone with dropdown menu (visible on all pages)
                 <div className="relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm text-cyan-200 border border-cyan-400/40 rounded-full font-medium hover:bg-cyan-500/30 hover:text-yellow-300 hover:border-yellow-400/60 transition-all duration-200"
                   >
                     <User className="w-4 h-4" />
-                    <span className="text-sm sm:text-base">{user.email}</span>
+                    <span className="text-sm sm:text-base">{user.email || user.phone}</span>
                   </button>
                   
                   {/* Dropdown menu */}
@@ -86,22 +87,24 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
                   )}
                 </div>
               ) : (
-                // User is not logged in - show Login and Sign Up links
-                <div className="flex items-center gap-3">
-                  <Link
-                    href="/login"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm text-cyan-200 border border-cyan-400/40 rounded-full font-medium hover:bg-cyan-500/30 hover:text-yellow-300 hover:border-yellow-400/60 transition-all duration-200 text-sm sm:text-base"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>Login</span>
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF5E00] to-[#FF5E00]/80 text-white border border-yellow-400/40 rounded-full font-medium hover:from-[#FF5E00]/90 hover:to-[#FF5E00]/70 hover:shadow-lg hover:shadow-orange-400/30 transition-all duration-200 text-sm sm:text-base"
-                  >
-                    <span>Sign Up</span>
-                  </Link>
-                </div>
+                // User is not logged in - show Login and Sign Up links only on services page
+                pathname === '/services' && (
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href="/login"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-sm text-cyan-200 border border-cyan-400/40 rounded-full font-medium hover:bg-cyan-500/30 hover:text-yellow-300 hover:border-yellow-400/60 transition-all duration-200 text-sm sm:text-base"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      <span>Login</span>
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF5E00] to-[#FF5E00]/80 text-white border border-yellow-400/40 rounded-full font-medium hover:from-[#FF5E00]/90 hover:to-[#FF5E00]/70 hover:shadow-lg hover:shadow-orange-400/30 transition-all duration-200 text-sm sm:text-base"
+                    >
+                      <span>Sign Up</span>
+                    </Link>
+                  </div>
+                )
               )}
             </div>
           </div>

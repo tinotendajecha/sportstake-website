@@ -25,17 +25,6 @@ const teamMembers = [
       linkedin: '#',
       facebook: '#'
     },
-  },
-  {
-    name: 'Kudzai Chitima',
-    role: 'Strategic Advisor',
-    image: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-    description: 'Strategic advisor with extensive experience in sports business development and market analysis. Focused on driving innovation and growth across African sports markets.',
-    social: {
-      twitter: '#',
-      linkedin: '#',
-      facebook: '#'
-    }
   }
 ];
 

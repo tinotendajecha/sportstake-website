@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Mail, Lock, UserPlus, Sparkles } from 'lucide-react';
+import { Mail, Phone, Lock, UserPlus, Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
 
 export default function SignupPage() {
@@ -17,6 +17,7 @@ export default function SignupPage() {
   const { signup, isAuthenticated } = useAuth();
   
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -35,6 +36,12 @@ export default function SignupPage() {
     e.preventDefault();
     setError('');
 
+    // Validate that at least email or phone is provided
+    if (!email && !phone) {
+      setError('Please provide either an email or phone number');
+      return;
+    }
+
     // Validate passwords match
     if (password !== confirmPassword) {
       setError('Passwords do not match');
@@ -49,7 +56,7 @@ export default function SignupPage() {
 
     setLoading(true);
 
-    const result = await signup(email, password);
+    const result = await signup(email || null, phone || null, password);
 
     if (result.success) {
       // Redirect to the page user tried to access, or home
@@ -88,7 +95,7 @@ export default function SignupPage() {
                 {/* Email input */}
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-semibold text-cyan-200">
-                    Email
+                    Email <span className="text-cyan-400/60 text-xs">(optional)</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-400/70" />
@@ -97,11 +104,31 @@ export default function SignupPage() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      required
                       className="w-full pl-10 pr-4 py-3 bg-black/60 border border-cyan-400/40 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-yellow-400/60 focus:ring-2 focus:ring-yellow-400/30 transition-all"
                       placeholder="you@example.com"
                     />
                   </div>
+                </div>
+
+                {/* Phone input */}
+                <div className="space-y-2">
+                  <label htmlFor="phone" className="block text-sm font-semibold text-cyan-200">
+                    Phone Number <span className="text-cyan-400/60 text-xs">(optional)</span>
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-400/70" />
+                    <input
+                      id="phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 bg-black/60 border border-cyan-400/40 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-yellow-400/60 focus:ring-2 focus:ring-yellow-400/30 transition-all"
+                      placeholder="+1234567890"
+                    />
+                  </div>
+                  <p className="text-xs text-cyan-400/60">
+                    Provide at least one: email or phone number
+                  </p>
                 </div>
 
                 {/* Password input */}
