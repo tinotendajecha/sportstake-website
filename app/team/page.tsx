@@ -3,19 +3,7 @@
 import Layout from '@/components/Layout';
 import { Twitter, Facebook, Linkedin, MessageCircle } from 'lucide-react';
 
-const teamMembers = [
-  {
-    name: 'Larry Michael Dube',
-    role: 'Co-Founder & Economics Lead',
-    image: '/images/sportstake36.png',
-    description: 'An innovator majoring in Economics with a focus on investment analysis, emerging markets, information technology, sports data development, and performance. A Professional at market intelligence holding a B.Com Economics (hons) and languages.',
-    social: {
-      twitter: '#',
-      linkedin: '#',
-      facebook: '#'
-    }
-  },
-  {
+const teamMembers = [ {
     name: 'Paul Ntonya',
     role: 'Co-Founder & Business Development',
     image: '/images/sportstake37.png',
@@ -25,7 +13,19 @@ const teamMembers = [
       linkedin: '#',
       facebook: '#'
     },
-  }
+  },
+  {
+    name: 'Nyasha Kadenge',
+    role: 'Co-Founder',
+    image: '/images/nyasha.jpg',
+    description: 'Nyasha Kadenge is a professional with over 14 years of senior management experience in administration, accounting, and auditing. He specializes in football administration, policy, strategy, and financial reporting. Qualifications include a Master in International Sports Management and a Bachelor of Business and Commerce, Majoring in Accounting.',
+    social: {
+      twitter: '#',
+      linkedin: '#',
+      facebook: '#'
+    }
+  },
+ 
 ];
 
 export default function Team() {
