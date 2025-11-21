@@ -18,6 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0070f3" />
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           <LoadingScreen />

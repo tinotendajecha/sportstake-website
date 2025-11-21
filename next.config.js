@@ -1,11 +1,16 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Removed 'output: export' to enable API routes for authentication
-  // API routes require server-side rendering, not static export
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
+});
+
+const nextConfig = withPWA({
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
-};
+  // Other custom Next.js options here
+});
 
 module.exports = nextConfig;
