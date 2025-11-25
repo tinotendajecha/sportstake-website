@@ -140,7 +140,6 @@ export default function Layout({ children, title, subtitle, backgroundImage }: L
               <div className="rounded-2xl bg-black/40 backdrop-blur-md shadow-xl pb-4 pt-4 px-2 sm:px-4 flex flex-col items-center space-y-3 sm:space-y-4">
                 {/* Logo & Name */}
                 <div className="relative w-24 h-24 sm:w-36 sm:h-36 lg:w-36 lg:h-36 rounded-2xl overflow-hidden 
-      bg-gradient-to-br from-cyan-500/50 via-black/60 to-orange-400/30 
       shadow-md flex items-center justify-center">
                   <Image
                     src="/images/sportstake30.png"
